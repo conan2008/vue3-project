@@ -1,12 +1,17 @@
 import { Module } from 'vuex'
+import { StateType } from '@/types'
 
-interface Test1State {
-  name: string
-  age?: number
+const state = {
+  name: 'zhangy',
+  age: 31
 }
 
-const test1State: Test1State = {
-  name: 'zhangy'
+type Test1StateType = typeof state
+
+const test1: Module<Test1StateType, StateType> = {
+  namespaced: true,
+  ...state
 }
 
-export default test1State
+export { Test1StateType, state }
+export default test1

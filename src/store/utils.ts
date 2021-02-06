@@ -1,7 +1,7 @@
 import store from '@/store'
 
 // 定义 state 下的 module 值
-type ModuleNameType = 'app' | 'console' | 'user'
+type ModuleNameType = 'test1' | 'test2'
 
 /**
  * @description setStoreState -方法是一个 mutaitions 的操作
@@ -25,7 +25,7 @@ type ModuleNameType = 'app' | 'console' | 'user'
 export function setStoreState<T>(
   module: ModuleNameType,
   key: keyof T,
-  value: any
+  value: unknown
 ) {
   store.commit({
     type: module + '/__set',
@@ -42,9 +42,14 @@ export function setStoreState<T>(
 export function dispatchAction<T>(
   module: ModuleNameType,
   key: keyof T,
-  value?: any
+  value?: unknown,
+  async?: boolean
 ) {
-  store.dispatch(`${module}/${key}`, value)
+  if (async) {
+    return store.dispatch(`${module}/${key}`, value)
+  } else {
+    store.dispatch(`${module}/${key}`, value)
+  }
 }
 
 /**

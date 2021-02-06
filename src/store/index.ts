@@ -1,11 +1,11 @@
 import { createStore, createLogger, Store } from 'vuex'
 import createPersistedState from 'vuex-persistedstate' // vuex缓存
 import modules from './modules'
+import { Test1StateType } from './modules/test1/state'
 
 // vuex state 的模块的类型
 type ModuleType = {
-  test1: AppStateType
-  test2: ConsoleStateType
+  test1: Test1StateType
 }
 
 // 所有的StateType
@@ -19,12 +19,12 @@ const store: Store<StateType> = createStore({
       ? [
           createLogger(),
           createPersistedState({
-            paths: ['app', 'console', 'user']
+            paths: ['test1']
           })
         ]
       : [
           createPersistedState({
-            paths: ['app', 'console', 'user']
+            paths: ['test1']
           })
         ]
 })

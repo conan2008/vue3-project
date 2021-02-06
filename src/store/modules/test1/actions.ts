@@ -1,19 +1,20 @@
 import { setStoreState } from '../../utils'
-import { Store } from 'vuex'
+// import { Store } from 'vuex'
 import { getUser } from '@/api/test'
 import { HttpResponse } from '@/types'
-import { getUser } from '@/api/test'
 
 const test1Actions = {
   // 请求
-  async getUser(): Promise<HttpResponse> {
-    const res = await getUser()
-    setStoreState('test1', 'name', data ? data : 'test1')
-    return res
+  async getData(): Promise<HttpResponse> {
+    const res: HttpResponse = await getUser()
+    setStoreState('test1', 'name', res.data ? 'test1' : 'test11')
+    return new Promise(reslove => {
+      reslove(res)
+    })
   }
 }
 
-type Test1ActionsType = keyof typeof test1Actions
+type Test1ActionsType = typeof test1Actions
 
 export { Test1ActionsType }
 export default test1Actions
